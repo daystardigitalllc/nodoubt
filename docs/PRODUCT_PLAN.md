@@ -111,13 +111,13 @@ Launch with approximately 50–100 reviewed questions across these categories:
 
 Every published answer should have an author, reviewer, status, theological tradition/scope, sources, last-reviewed date, and version history. Establish a small review board that includes theological and pastoral review. Professional review is required for mental-health or crisis-related material.
 
-The starting translations are ESV and NLT. Store canonical references separately from quoted text, label the translation on every quotation, and keep translation-specific copyright notices in the app. ESV access should use Crossway’s API while the app is non-commercial and within its terms. Before launch, request written permission from Crossway and Tyndale describing the mobile/web app, its commentary-like content, expected verse count, and any monetization. Do not assume the general 500-verse quotation allowance covers this product.
+The starting translation family is the public-domain World English Bible (WEB). Use its 66-book Protestant edition for the default Protestant reading experience and the World English Bible Catholic Edition (WEBC), with the traditional Catholic book set and ordering, for the Catholic reading experience. This gives the app modern English across both modes without quotation royalties or publisher licensing. Label the active edition on every quotation and never modify its text while still calling it the World English Bible. Store canonical references separately from verse text so editions and book-order mappings remain reliable.
 
 ### Theological scope
 
 Use a broadly orthodox Christian baseline summarized by the Nicene Creed: one God; the Trinity; Jesus Christ as fully God and fully human; his incarnation, death, bodily resurrection, ascension, and future return; the authority of Scripture; salvation through Christ; the Holy Spirit; the Church; resurrection; and final judgment.
 
-For the first release, use the 66-book Protestant canon reflected by the chosen ESV and NLT editions. On issues where orthodox Christians differ, the app must:
+Support both the 66-book Protestant canon and the 73-book Catholic canon through the corresponding WEB editions. Content that relies on a deuterocanonical book must be labeled so Protestant users understand the source and Catholic users can include it normally. On issues where orthodox Christians differ, the app must:
 
 1. Identify the issue as disputed.
 2. Summarize major views fairly.
@@ -261,7 +261,7 @@ Additional screens:
 
 1. Validate the one-sentence promise for the age 16–40 audience.
 2. Adopt the broadly Nicene baseline and write the disputed-topic policy.
-3. Confirm ESV and NLT licensing with Crossway and Tyndale.
+3. Import and verify the public-domain WEB Protestant and Catholic editions, preserving their edition names and unmodified text.
 4. Recruit content author/reviewer roles.
 5. Write editorial, sourcing, reading-level, privacy, and crisis policies.
 6. Select 50–100 launch questions and success measures.
@@ -354,8 +354,8 @@ This proves the user experience and content model before introducing generative 
 ## 13. Confirmed decisions
 
 - Audience: ages 16–40.
-- Bible translations: ESV and NLT, subject to written licensing confirmation.
-- Theological starting point: broadly orthodox Nicene Christianity using the 66-book Protestant canon; disputed positions are labeled and represented fairly.
+- Bible translations: public-domain World English Bible Protestant and Catholic editions.
+- Theological starting point: broadly orthodox Nicene Christianity supporting both Protestant and Catholic canons; disputed positions are labeled and represented fairly.
 - Accounts: users may register and manage their account.
 - Contributions: verified users may propose answers, but only admins may publish them.
 - Role control: the owner delegates and revokes administrative access.
