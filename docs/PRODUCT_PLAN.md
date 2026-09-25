@@ -4,6 +4,8 @@
 
 No Doubt helps Christians work through questions and doubts using clear, compassionate answers grounded in Scripture, historical evidence, logic, and an explicitly Christian worldview.
 
+The initial audience is people ages 16–40. The writing target remains simple and approachable, but the tone must never feel childish or patronizing.
+
 The product should help a user move from an anxious or vague question to:
 
 1. A short, direct answer.
@@ -31,6 +33,10 @@ The app is educational and pastoral support, not a replacement for a pastor, cou
   - suggested resources;
   - related questions.
 - One conversational follow-up flow.
+- Email registration, sign-in, password reset, and account deletion.
+- Registered-user profiles with a contribution history.
+- A clearly labeled “Submit an answer” action on unanswered and existing questions.
+- A personal dashboard showing whether each submission is pending, approved, declined, or needs revision.
 - Helpful/not-helpful feedback and optional anonymous comment.
 - Share and bookmark answers locally.
 - Crisis-language response that directs a user to immediate human help.
@@ -41,11 +47,33 @@ The app is educational and pastoral support, not a replacement for a pastor, cou
 - Public user posts, comments, or community chat.
 - Direct messaging with pastors.
 - Multiple denominations or personalized theological profiles.
-- User-generated answers.
 - Subscriptions or payments.
 - Fully open-ended AI answers sourced from the public internet.
 
-These features add moderation, legal, privacy, theological, and operational complexity before the core experience is proven.
+Public comments, direct messages, and automatic publication of user content remain postponed because they add significant moderation and safety risk.
+
+### Community contribution model
+
+Anyone may browse published content. A registered and email-verified user may submit a proposed answer, correction, source, or question. Nothing submitted by a user becomes public automatically.
+
+Use four application roles:
+
+- `user`: manages their own profile and submissions.
+- `reviewer`: reviews submissions and requests changes but cannot manage roles.
+- `admin`: approves, declines, edits, publishes, unpublishes, and handles reports.
+- `owner`: has admin powers and alone can grant or remove admin/owner roles.
+
+The initial owner is the project creator. Keeping role assignment owner-only prevents an admin account from silently creating more administrators.
+
+Submission lifecycle:
+
+```text
+draft → submitted → in_review → changes_requested → resubmitted
+                           ↘ approved → published
+                           ↘ declined
+```
+
+Every review decision records the reviewer, timestamp, internal note, and user-facing reason. Editing a published answer creates a new revision; it does not overwrite the approved version or its audit history. A submission must include the proposed answer, supporting Bible references, and sources for factual or historical claims. Users must confirm that the writing is theirs or that quoted material is properly licensed and attributed.
 
 ## 3. Content strategy
 
@@ -83,7 +111,21 @@ Launch with approximately 50–100 reviewed questions across these categories:
 
 Every published answer should have an author, reviewer, status, theological tradition/scope, sources, last-reviewed date, and version history. Establish a small review board that includes theological and pastoral review. Professional review is required for mental-health or crisis-related material.
 
-Use a Bible translation that permits the intended amount and method of digital quotation. Store references separately from quoted text so the displayed translation can be changed later.
+The starting translations are ESV and NLT. Store canonical references separately from quoted text, label the translation on every quotation, and keep translation-specific copyright notices in the app. ESV access should use Crossway’s API while the app is non-commercial and within its terms. Before launch, request written permission from Crossway and Tyndale describing the mobile/web app, its commentary-like content, expected verse count, and any monetization. Do not assume the general 500-verse quotation allowance covers this product.
+
+### Theological scope
+
+Use a broadly orthodox Christian baseline summarized by the Nicene Creed: one God; the Trinity; Jesus Christ as fully God and fully human; his incarnation, death, bodily resurrection, ascension, and future return; the authority of Scripture; salvation through Christ; the Holy Spirit; the Church; resurrection; and final judgment.
+
+For the first release, use the 66-book Protestant canon reflected by the chosen ESV and NLT editions. On issues where orthodox Christians differ, the app must:
+
+1. Identify the issue as disputed.
+2. Summarize major views fairly.
+3. Cite the biblical reasoning used by each view.
+4. Avoid presenting an admin’s preference as universal Christian doctrine.
+5. State the app’s editorial position only if the owner later adopts one.
+
+Examples include baptism, communion, predestination/free will, spiritual gifts, women in ministry, church government, end-times timelines, creation models, and eternal-security formulations. This scope should be converted into a short public statement of faith and a detailed internal review rubric before community submissions open.
 
 ## 4. Recommended technical architecture
 
@@ -151,6 +193,13 @@ The server performs rate limiting, safety classification, retrieval, prompt cons
 - `message_citations`: message_id, content_section_id, source_id.
 - `feedback`: id, message_id or answer_id, helpful, reason, comment, created_at.
 - `bookmarks`: user_id, answer_id, created_at.
+- `profiles`: user_id, display_name, avatar_url, bio, contribution_count, created_at, deleted_at.
+- `user_roles`: user_id, role, granted_by, granted_at, revoked_at.
+- `submissions`: id, author_id, question_id nullable, proposed_question, proposed_answer, status, current_revision_id, submitted_at, decided_at.
+- `submission_revisions`: id, submission_id, revision_number, answer_body, author_note, created_by, created_at.
+- `submission_bible_references`: revision_id, book, chapter, verse_start, verse_end, translation, proposed_excerpt.
+- `submission_sources`: revision_id, title, author, publisher, url, quoted_text, claim_supported.
+- `submission_reviews`: id, submission_id, revision_id, reviewer_id, decision, internal_note, user_message, created_at.
 - `content_flags`: id, target_type, target_id, reason, status, resolved_by.
 - `audit_log`: actor_id, action, target_type, target_id, metadata, created_at.
 
@@ -201,16 +250,18 @@ Additional screens:
 - Follow-up conversation.
 - Resource details/external-link confirmation.
 - Feedback/report form.
-- Optional sign-in and account settings in a later release.
-- Separate protected editorial web console.
+- Sign-up, sign-in, email verification, password reset, profile, and account settings.
+- Submit-answer form with Bible references, sources, autosaved draft, preview, and originality attestation.
+- My Contributions with status and reviewer feedback.
+- Separate protected editorial console containing the submission queue, side-by-side revisions, source checks, approve/decline/request-changes actions, publishing controls, audit history, and owner-only role management.
 
 ## 9. Step-by-step delivery plan
 
 ### Phase 0 — Product decisions and governance
 
-1. Write the one-sentence promise and target audience.
-2. Define the theological scope and disputed-topic policy.
-3. Select an initial Bible translation and confirm licensing.
+1. Validate the one-sentence promise for the age 16–40 audience.
+2. Adopt the broadly Nicene baseline and write the disputed-topic policy.
+3. Confirm ESV and NLT licensing with Crossway and Tyndale.
 4. Recruit content author/reviewer roles.
 5. Write editorial, sourcing, reading-level, privacy, and crisis policies.
 6. Select 50–100 launch questions and success measures.
@@ -241,8 +292,10 @@ Exit condition: one small app builds in CI and runs on the web, an iOS simulator
 1. Create the database schema and Row Level Security policies.
 2. Seed categories and the first 10–20 fully reviewed answers.
 3. Build category browsing, filters, keyword search, answer pages, related questions, bookmarks, and feedback.
-4. Create the protected editorial workflow; a simple internal console is sufficient initially.
-5. Add analytics events without recording raw sensitive question text by default.
+4. Add registration, verification, profiles, account deletion, and secure role-based access.
+5. Build submission drafts, supporting sources, status tracking, and revision history.
+6. Create the protected review queue and owner-only role administration.
+7. Add analytics events without recording raw sensitive question text by default.
 
 Exit condition: the app is valuable without AI.
 
@@ -298,14 +351,21 @@ Build a non-AI vertical slice around one category, “Does God exist?”, with 5
 
 This proves the user experience and content model before introducing generative variability. After that vertical slice is tested, add RAG and follow-ups behind a feature flag.
 
-## 13. Decisions still needed
+## 13. Confirmed decisions
 
-- Exact audience: children, teens, adults, new believers, long-time Christians, or a defined combination.
-- Theological scope and handling of denominational differences.
-- Bible translation and quotation license.
+- Audience: ages 16–40.
+- Bible translations: ESV and NLT, subject to written licensing confirmation.
+- Theological starting point: broadly orthodox Nicene Christianity using the 66-book Protestant canon; disputed positions are labeled and represented fairly.
+- Accounts: users may register and manage their account.
+- Contributions: verified users may propose answers, but only admins may publish them.
+- Role control: the owner delegates and revokes administrative access.
+
+## 14. Decisions still needed
+
 - Whether users can remain completely anonymous.
 - Whether question history is stored, for how long, and whether it syncs across devices.
-- Who authors and approves content.
+- The public statement of faith and the final disputed-topic review rubric.
+- Whether approved contributors receive visible attribution or may publish anonymously.
 - Initial launch countries, which affect crisis resources and privacy obligations.
 - Brand name confirmation and availability checks.
 - Budget for AI, hosting, content review, Apple developer enrollment, and Google Play enrollment.
