@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/auth.page').then((m) => m.AuthPage),
   },
   {
+    path: 'contribute',
+    loadComponent: () => import('./contribute/contribute.page').then((m) => m.ContributePage),
+  },
+  {
     path: 'answer',
     loadComponent: () => import('./answer/answer.page').then((m) => m.AnswerPage),
   },

@@ -1,0 +1,67 @@
+<ion-content [fullscreen]="true">
+  <header class="page-shell contribute-header">
+    <a routerLink="/home" class="brand">NoDoubt</a>
+    <a routerLink="/home">Back to answers</a>
+  </header>
+
+  <main class="page-shell">
+    @if (!auth.ready()) {
+      <p class="loading">Checking your account...</p>
+    } @else if (!auth.user()) {
+      <section class="signed-out">
+        <p class="section-label">Community contributions</p>
+        <h1>Sign in before submitting an answer.</h1>
+        <p>Every submission is connected to an account so reviewers can request changes and contributors can track decisions.</p>
+        <ion-button routerLink="/auth">Sign in or create an account</ion-button>
+      </section>
+    } @else {
+      <div class="contribute-layout">
+        <section>
+          <p class="section-label">Propose an answer</p>
+          <h1>Help someone work through a real question.</h1>
+          <p class="intro">Write plainly. Cite the Bible passage or historical source you are relying on. An admin will review the answer before anyone else can see it.</p>
+
+          <form (ngSubmit)="submit()">
+            <label for="question">Question or doubt</label>
+            <ion-textarea id="question" name="question" [(ngModel)]="question" autoGrow="true" maxlength="300" placeholder="Example: How can I trust that the resurrection happened?" required></ion-textarea>
+            <small>{{ question.length }}/300</small>
+
+            <label for="answer">Your proposed answer</label>
+            <ion-textarea id="answer" name="answer" [(ngModel)]="answer" autoGrow="true" rows="9" maxlength="20000" placeholder="Give the direct answer first, then explain the reasoning and supporting evidence." required></ion-textarea>
+            <small>{{ answer.length }}/20,000</small>
+
+            <label for="note">Sources and notes for reviewers</label>
+            <ion-textarea id="note" name="authorNote" [(ngModel)]="authorNote" autoGrow="true" rows="4" maxlength="2000" placeholder="List Bible references, books, articles, or other sources the reviewer should verify."></ion-textarea>
+            <small>{{ authorNote.length }}/2,000</small>
+
+            @if (error) { <p class="form-message error" role="alert">{{ error }}</p> }
+            @if (message) { <p class="form-message success" role="status">{{ message }}</p> }
+
+            <ion-button type="submit" [disabled]="busy || !canSubmit()">
+              {{ busy ? 'Submitting...' : 'Submit for review' }}
+            </ion-button>
+          </form>
+        </section>
+
+        <aside>
+          <h2>Your contributions</h2>
+          @if (loadingHistory) {
+            <p>Loading...</p>
+          } @else if (!submissions.length) {
+            <p>You have not submitted an answer yet.</p>
+          } @else {
+            <ol>
+              @for (submission of submissions; track submission.id) {
+                <li>
+                  <strong>{{ submission.proposed_question }}</strong>
+                  <span [attr.data-status]="submission.status">{{ statusLabel(submission.status) }}</span>
+                  <small>Updated {{ submission.updated_at | date:'mediumDate' }}</small>
+                </li>
+              }
+            </ol>
+          }
+        </aside>
+      </div>
+    }
+  </main>
+</ion-content>
