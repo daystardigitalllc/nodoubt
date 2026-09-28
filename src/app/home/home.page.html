@@ -1,0 +1,88 @@
+<ion-content [fullscreen]="true">
+  <header class="site-header page-shell">
+    <a class="brand" aria-label="NoDoubt home" href="/home">
+      <span class="brand-mark" aria-hidden="true"><span class="cross">†</span></span>
+      <span>No<span>Doubt</span></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#explore">Explore</a>
+      <a href="#method">Our method</a>
+      <ion-button fill="outline" size="small" shape="round">Sign in</ion-button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="page-shell hero-content">
+        <div class="eyebrow"><ion-icon name="shield-checkmark-outline"></ion-icon> A safe place for honest questions</div>
+        <h1>Doubt isn't the end<br />of your <em>faith.</em></h1>
+        <p class="hero-copy">Bring your hardest questions. Explore thoughtful answers grounded in Scripture, history, and reason—without judgment.</p>
+
+        <form class="question-box" (ngSubmit)="ask()">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+          <ion-input
+            name="question"
+            [(ngModel)]="question"
+            aria-label="What are you having trouble with?"
+            placeholder="What are you having trouble with?"
+            enterkeyhint="search"
+          ></ion-input>
+          <ion-button type="submit" shape="round" [disabled]="!question.trim()">
+            Find an answer <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-button>
+        </form>
+
+        <div class="popular" aria-label="Popular questions">
+          <span>People often ask:</span>
+          @for (item of popularQuestions; track item) {
+            <button type="button" (click)="ask(item)">{{ item }}</button>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="explore" class="explore page-shell">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">Explore by topic</span>
+          <h2>Start where you are.</h2>
+        </div>
+        <p>You don't need the perfect words. Choose what feels closest to your question.</p>
+      </div>
+
+      <div class="category-grid">
+        @for (category of categories; track category.title) {
+          <ion-card button="true" (click)="exploreCategory(category)" [class]="'category-card ' + category.color">
+            <ion-card-content>
+              <div class="category-icon"><ion-icon [name]="category.icon"></ion-icon></div>
+              <h3>{{ category.title }}</h3>
+              <p>{{ category.description }}</p>
+              <span class="card-link">Explore topic <ion-icon name="arrow-forward"></ion-icon></span>
+            </ion-card-content>
+          </ion-card>
+        }
+      </div>
+    </section>
+
+    <section id="method" class="method-section">
+      <div class="page-shell method-card">
+        <div>
+          <span class="kicker light">What you can expect</span>
+          <h2>Clarity without shortcuts.</h2>
+        </div>
+        <div class="method-points">
+          <p><strong>Plain language</strong><span>Clear enough to understand, deep enough to trust.</span></p>
+          <p><strong>Sources you can check</strong><span>Scripture, history, and evidence shown alongside every answer.</span></p>
+          <p><strong>Honest about differences</strong><span>Major Christian views are labeled when faithful people disagree.</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-shell">
+    <span>NoDoubt</span>
+    <p>Questions deserve honest answers.</p>
+    <small>For education and spiritual support—not emergency or professional care.</small>
+  </footer>
+</ion-content>

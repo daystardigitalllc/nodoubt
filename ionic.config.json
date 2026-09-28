@@ -1,0 +1,7 @@
+{
+  "name": "nodoubt-scaffold",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

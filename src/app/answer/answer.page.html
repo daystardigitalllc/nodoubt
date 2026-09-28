@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home" text="Back"></ion-back-button></ion-buttons>
+    <ion-title>NoDoubt</ion-title>
+    <ion-buttons slot="end"><ion-button aria-label="Save this answer"><ion-icon slot="icon-only" name="bookmark-outline"></ion-icon></ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <main class="answer-shell">
+    <section class="question-header">
+      <ion-chip>God & existence</ion-chip>
+      <p class="overline">You asked</p>
+      <h1>{{ question }}</h1>
+      <p class="reviewed"><ion-icon name="checkmark-circle"></ion-icon> Reviewed answer · 6 minute read</p>
+    </section>
+
+    <article>
+      <section class="direct-answer">
+        <div class="answer-label"><ion-icon name="sparkles-outline"></ion-icon> The short answer</div>
+        <h2>Belief in God is reasonable—even though God cannot be tested like an object in a laboratory.</h2>
+        <p>We cannot put God under a microscope. But we can ask which explanation makes the best sense of what we observe: why anything exists, why the universe follows understandable laws, why human beings recognize real moral duties, and why people are conscious and able to reason.</p>
+      </section>
+
+      <section>
+        <h2>A simple way to think about it</h2>
+        <p>Imagine finding a book in an empty field. The ink, paper, and binding are physical things, but their existence does not fully explain the meaningful words on the pages. The ordered message gives you a reason to believe a mind was involved.</p>
+        <p>Christians see the universe in a similar way. It is orderly, understandable, and capable of producing conscious people who can ask why it exists. That does not prove every Christian belief at once, but it gives us good reason to consider a Creator rather than dismissing God without examination.</p>
+      </section>
+
+      <section class="evidence-grid">
+        <div>
+          <span>01</span>
+          <h3>Why is there something?</h3>
+          <p>Things inside the universe depend on other things. Christians argue that reality ultimately needs a necessary foundation that does not borrow its existence from something else.</p>
+        </div>
+        <div>
+          <span>02</span>
+          <h3>Why is nature ordered?</h3>
+          <p>The universe operates through stable, mathematically describable laws. A rational source is one explanation for why reality is intelligible to rational minds.</p>
+        </div>
+        <div>
+          <span>03</span>
+          <h3>Why does morality matter?</h3>
+          <p>Most of us believe some acts are truly wrong, not merely unpopular. Objective moral duties make sense if goodness is grounded beyond personal preference.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>What Scripture says</h2>
+        <p>The Bible does not shame sincere questions. It repeatedly invites people to notice creation, seek wisdom, and examine testimony.</p>
+        <div class="verse-list">
+          @for (verse of verses; track verse.reference) {
+            <blockquote>
+              <p>“{{ verse.text }}”</p>
+              <cite>{{ verse.reference }}</cite>
+              <small>{{ verse.note }}</small>
+            </blockquote>
+          }
+        </div>
+      </section>
+
+      <aside class="honest-note">
+        <strong>An honest limit</strong>
+        <p>These arguments do not force belief, and thoughtful people disagree about them. They make belief in God intellectually serious. The specifically Christian case continues with questions about Jesus, the resurrection, and whether the biblical witnesses are trustworthy.</p>
+      </aside>
+
+      <section class="next-step">
+        <p class="overline">Keep exploring</p>
+        <h2>What would help next?</h2>
+        <div class="next-links">
+          <button>What evidence is there for Jesus?</button>
+          <button>Can science and faith fit together?</button>
+          <button>Why doesn't God make himself obvious?</button>
+        </div>
+        <ion-button expand="block" shape="round">Ask a follow-up question</ion-button>
+        <a routerLink="/home">Explore another topic</a>
+      </section>
+    </article>
+
+    <footer>
+      <p>This starter answer demonstrates the product format and still requires formal editorial review before publication.</p>
+      <p>Scripture text: World English Bible, public domain.</p>
+    </footer>
+  </main>
+</ion-content>
