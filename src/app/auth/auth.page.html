@@ -1,0 +1,64 @@
+<ion-content [fullscreen]="true">
+  <main class="auth-shell">
+    <a class="wordmark" routerLink="/home">
+      <span class="wordmark-icon" aria-hidden="true"><img src="assets/branding/nodoubt-logo.png" alt="" /></span>
+      NoDoubt
+    </a>
+
+    <section>
+      @if (mode === 'register') {
+        <p class="section-label">Create an account</p>
+        <h1>Contribute to better answers.</h1>
+        <p class="intro">Registered users can save answers and submit questions, sources, and proposed responses for admin review.</p>
+      } @else if (mode === 'reset') {
+        <p class="section-label">Password help</p>
+        <h1>Reset your password.</h1>
+        <p class="intro">Enter the email used for your account. We will send a secure reset link.</p>
+      } @else {
+        <p class="section-label">Welcome back</p>
+        <h1>Sign in to NoDoubt.</h1>
+        <p class="intro">Your saved answers and contribution history stay connected to your account.</p>
+      }
+
+      <form (ngSubmit)="submit()">
+        @if (mode === 'register') {
+          <label for="display-name">Display name</label>
+          <ion-input id="display-name" name="displayName" [(ngModel)]="displayName" autocomplete="name" required></ion-input>
+        }
+
+        <label for="email">Email address</label>
+        <ion-input id="email" name="email" [(ngModel)]="email" type="email" autocomplete="email" required></ion-input>
+
+        @if (mode !== 'reset') {
+          <label for="password">Password</label>
+          <ion-input id="password" name="password" [(ngModel)]="password" type="password" autocomplete="current-password" minlength="8" required></ion-input>
+          <small>Use at least 8 characters.</small>
+        }
+
+        @if (error) { <p class="form-message error" role="alert">{{ error }}</p> }
+        @if (message) { <p class="form-message success" role="status">{{ message }}</p> }
+
+        <ion-button type="submit" expand="block" [disabled]="busy || !email || (mode !== 'reset' && password.length < 8) || (mode === 'register' && !displayName.trim())">
+          @if (busy) { <ion-spinner name="crescent"></ion-spinner> }
+          @else if (mode === 'register') { Create account }
+          @else if (mode === 'reset') { Send reset link }
+          @else { Sign in }
+        </ion-button>
+      </form>
+
+      <div class="auth-links">
+        @if (mode === 'sign-in') {
+          <button type="button" (click)="setMode('register')">Create an account</button>
+          <button type="button" (click)="setMode('reset')">Forgot password?</button>
+        } @else {
+          <button type="button" (click)="setMode('sign-in')">Return to sign in</button>
+        }
+      </div>
+    </section>
+
+    <aside>
+      <strong>Answers are not published automatically.</strong>
+      <p>Every community submission enters a review queue. Admins check its claims, sources, Scripture references, and tone before publication.</p>
+    </aside>
+  </main>
+</ion-content>

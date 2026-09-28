@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   IonButton,
   IonContent,
@@ -23,7 +24,7 @@ interface DoubtCategory {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [FormsModule, IonButton, IonContent, IonIcon, IonInput],
+  imports: [FormsModule, IonButton, IonContent, IonIcon, IonInput, RouterLink],
 })
 export class HomePage {
   private readonly router = inject(Router);
