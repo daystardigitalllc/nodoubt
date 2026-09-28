@@ -1,4 +1,4 @@
-# No Doubt — Product and Build Plan
+# No Doubt: Product and Build Plan
 
 ## 1. Product mission
 
@@ -257,7 +257,7 @@ Additional screens:
 
 ## 9. Step-by-step delivery plan
 
-### Phase 0 — Product decisions and governance
+### Phase 0: Product decisions and governance
 
 1. Validate the one-sentence promise for the age 16–40 audience.
 2. Adopt the broadly Nicene baseline and write the disputed-topic policy.
@@ -268,7 +268,7 @@ Additional screens:
 
 Exit condition: the team can explain what counts as a publishable answer and who approves it.
 
-### Phase 1 — UX prototype
+### Phase 1: UX prototype
 
 1. Create low-fidelity flows for search, browse, answer, follow-up, and feedback.
 2. Test the language and navigation with 5–8 target users.
@@ -277,7 +277,7 @@ Exit condition: the team can explain what counts as a publishable answer and who
 
 Exit condition: users can find a useful answer without coaching.
 
-### Phase 2 — Application foundation
+### Phase 2: Application foundation
 
 1. Scaffold Ionic Angular with Capacitor, linting, tests, and environment configuration.
 2. Add web/PWA, iOS, and Android targets.
@@ -287,7 +287,7 @@ Exit condition: users can find a useful answer without coaching.
 
 Exit condition: one small app builds in CI and runs on the web, an iOS simulator/device, and an Android emulator/device.
 
-### Phase 3 — Curated content MVP
+### Phase 3: Curated content MVP
 
 1. Create the database schema and Row Level Security policies.
 2. Seed categories and the first 10–20 fully reviewed answers.
@@ -299,7 +299,7 @@ Exit condition: one small app builds in CI and runs on the web, an iOS simulator
 
 Exit condition: the app is valuable without AI.
 
-### Phase 4 — Guided AI and follow-ups
+### Phase 4: Guided AI and follow-ups
 
 1. Chunk and embed approved answer material.
 2. Implement the server-side `/answer` pipeline.
@@ -310,7 +310,7 @@ Exit condition: the app is valuable without AI.
 
 Exit condition: responses pass citation, factuality, theology, safety, reading-level, latency, and cost thresholds.
 
-### Phase 5 — Beta and launch
+### Phase 5: Beta and launch
 
 1. Run a private beta with diverse users and pastoral reviewers.
 2. Fix the highest-frequency failed searches and unclear answers.

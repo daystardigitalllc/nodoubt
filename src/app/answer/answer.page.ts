@@ -4,7 +4,6 @@ import {
   IonBackButton,
   IonButton,
   IonButtons,
-  IonChip,
   IonContent,
   IonHeader,
   IonIcon,
@@ -12,13 +11,13 @@ import {
   IonToolbar,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { bookmarkOutline, checkmarkCircle, openOutline, sparklesOutline } from 'ionicons/icons';
+import { bookmarkOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-answer',
   templateUrl: './answer.page.html',
   styleUrls: ['./answer.page.scss'],
-  imports: [IonBackButton, IonButton, IonButtons, IonChip, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar, RouterLink],
+  imports: [IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar, RouterLink],
 })
 export class AnswerPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
@@ -39,7 +38,7 @@ export class AnswerPage implements OnInit {
   ];
 
   constructor() {
-    addIcons({ bookmarkOutline, checkmarkCircle, openOutline, sparklesOutline });
+    addIcons({ bookmarkOutline });
   }
 
   ngOnInit(): void {

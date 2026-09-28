@@ -1,8 +1,8 @@
 <ion-content [fullscreen]="true">
   <header class="site-header page-shell">
     <a class="brand" aria-label="NoDoubt home" href="/home">
-      <span class="brand-mark" aria-hidden="true"><span class="cross">†</span></span>
-      <span>No<span>Doubt</span></span>
+      <span class="brand-mark" aria-hidden="true"><img src="assets/branding/nodoubt-logo.png" alt="" /></span>
+      <span class="brand-name">NoDoubt</span>
     </a>
     <nav aria-label="Primary navigation">
       <a href="#explore">Explore</a>
@@ -13,11 +13,10 @@
 
   <main>
     <section class="hero">
-      <div class="hero-glow" aria-hidden="true"></div>
       <div class="page-shell hero-content">
-        <div class="eyebrow"><ion-icon name="shield-checkmark-outline"></ion-icon> A safe place for honest questions</div>
+        <p class="intro-line">For honest questions about Christian faith</p>
         <h1>Doubt isn't the end<br />of your <em>faith.</em></h1>
-        <p class="hero-copy">Bring your hardest questions. Explore thoughtful answers grounded in Scripture, history, and reason—without judgment.</p>
+        <p class="hero-copy">Ask what is troubling you. We will show you a clear answer, the Scripture behind it, and sources you can check for yourself.</p>
 
         <form class="question-box" (ngSubmit)="ask()">
           <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
@@ -45,22 +44,23 @@
     <section id="explore" class="explore page-shell">
       <div class="section-heading">
         <div>
-          <span class="kicker">Explore by topic</span>
+          <span class="kicker">Browse common questions</span>
           <h2>Start where you are.</h2>
         </div>
         <p>You don't need the perfect words. Choose what feels closest to your question.</p>
       </div>
 
       <div class="category-grid">
-        @for (category of categories; track category.title) {
-          <ion-card button="true" (click)="exploreCategory(category)" [class]="'category-card ' + category.color">
-            <ion-card-content>
-              <div class="category-icon"><ion-icon [name]="category.icon"></ion-icon></div>
-              <h3>{{ category.title }}</h3>
-              <p>{{ category.description }}</p>
-              <span class="card-link">Explore topic <ion-icon name="arrow-forward"></ion-icon></span>
-            </ion-card-content>
-          </ion-card>
+        @for (category of categories; track category.title; let number = $index) {
+          <button class="category-row" type="button" (click)="exploreCategory(category)">
+            <span class="category-number">0{{ number + 1 }}</span>
+            <span class="category-copy">
+              <strong>{{ category.title }}</strong>
+              <span>{{ category.description }}</span>
+              <small>{{ category.examples }}</small>
+            </span>
+            <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+          </button>
         }
       </div>
     </section>
@@ -68,13 +68,13 @@
     <section id="method" class="method-section">
       <div class="page-shell method-card">
         <div>
-          <span class="kicker light">What you can expect</span>
-          <h2>Clarity without shortcuts.</h2>
+          <span class="kicker light">How answers are made</span>
+          <h2>You should be able to check our work.</h2>
         </div>
         <div class="method-points">
-          <p><strong>Plain language</strong><span>Clear enough to understand, deep enough to trust.</span></p>
-          <p><strong>Sources you can check</strong><span>Scripture, history, and evidence shown alongside every answer.</span></p>
-          <p><strong>Honest about differences</strong><span>Major Christian views are labeled when faithful people disagree.</span></p>
+          <p><strong>Start with the direct answer.</strong><span>No sermon before the point. Each page begins with a short response to the question asked.</span></p>
+          <p><strong>Show the source.</strong><span>Bible passages and historical claims appear with references, not as unsupported statements.</span></p>
+          <p><strong>Name disagreements.</strong><span>When Protestant and Catholic traditions differ, the answer says so plainly.</span></p>
         </div>
       </div>
     </section>
@@ -83,6 +83,6 @@
   <footer class="page-shell">
     <span>NoDoubt</span>
     <p>Questions deserve honest answers.</p>
-    <small>For education and spiritual support—not emergency or professional care.</small>
+    <small>For education and spiritual support. This app is not emergency or professional care.</small>
   </footer>
 </ion-content>

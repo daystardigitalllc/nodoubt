@@ -3,8 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonButton,
-  IonCard,
-  IonCardContent,
   IonContent,
   IonIcon,
   IonInput,
@@ -12,25 +10,20 @@ import {
 import { addIcons } from 'ionicons';
 import {
   arrowForward,
-  bookOutline,
-  heartOutline,
-  helpCircleOutline,
   searchOutline,
-  shieldCheckmarkOutline,
 } from 'ionicons/icons';
 
 interface DoubtCategory {
   title: string;
   description: string;
-  icon: string;
-  color: string;
+  examples: string;
 }
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [FormsModule, IonButton, IonCard, IonCardContent, IonContent, IonIcon, IonInput],
+  imports: [FormsModule, IonButton, IonContent, IonIcon, IonInput],
 })
 export class HomePage {
   private readonly router = inject(Router);
@@ -47,37 +40,29 @@ export class HomePage {
     {
       title: 'God & existence',
       description: 'Evidence, reason, creation, and the nature of God.',
-      icon: 'search-outline',
-      color: 'blue',
+      examples: 'Is God real? · Why is there something instead of nothing?',
     },
     {
       title: 'Bible & truth',
       description: 'Reliability, interpretation, history, and hard passages.',
-      icon: 'book-outline',
-      color: 'gold',
+      examples: 'Can I trust the Bible? · Why are there different translations?',
     },
     {
       title: 'Pain & suffering',
       description: 'Honest help for grief, injustice, fear, and unanswered prayer.',
-      icon: 'heart-outline',
-      color: 'rose',
+      examples: 'Why does God allow suffering? · Why was my prayer unanswered?',
     },
     {
       title: 'Faith & doubt',
       description: 'Questions about belief, salvation, prayer, and spiritual dryness.',
-      icon: 'help-circle-outline',
-      color: 'green',
+      examples: 'Is doubt a sin? · What if I do not feel close to God?',
     },
   ];
 
   constructor() {
     addIcons({
       arrowForward,
-      bookOutline,
-      heartOutline,
-      helpCircleOutline,
       searchOutline,
-      shieldCheckmarkOutline,
     });
   }
 
